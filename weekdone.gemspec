@@ -6,9 +6,9 @@ Gem::Specification.new do |spec|
   spec.authors       = ["thaim"]
   spec.email         = ["thaim24@gmail.com"]
 
-  spec.summary       = %q{TODO: Write a short summary, because RubyGems requires one.}
-  spec.description   = %q{TODO: Write a longer description or delete this line.}
-  spec.homepage      = "TODO: Put your gem's website or public repo URL here."
+  spec.summary       = "A Ruby gem for communicating with the Weekdone REST API"
+  spec.description   = "A Ruby gem for communicating with the Weekdone REST API"
+  spec.homepage      = "https://github.com/thaim/weekdone-sdk-ruby"
   spec.license       = "MIT"
   spec.required_ruby_version = Gem::Requirement.new(">= 2.3.0")
 
