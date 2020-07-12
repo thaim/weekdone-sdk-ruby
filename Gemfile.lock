@@ -1,12 +1,37 @@
 PATH
   remote: .
   specs:
-    weekdone (0.1.0)
+    weekdone (0.2.2)
+      faraday
+      faraday_middleware
+      her
+      simple_oauth
 
 GEM
   remote: https://rubygems.org/
   specs:
+    activemodel (5.2.4.3)
+      activesupport (= 5.2.4.3)
+    activesupport (5.2.4.3)
+      concurrent-ruby (~> 1.0, >= 1.0.2)
+      i18n (>= 0.7, < 2)
+      minitest (~> 5.1)
+      tzinfo (~> 1.1)
+    concurrent-ruby (1.1.6)
     diff-lcs (1.4.4)
+    faraday (0.17.3)
+      multipart-post (>= 1.2, < 3)
+    faraday_middleware (0.14.0)
+      faraday (>= 0.7.4, < 1.0)
+    her (1.1.0)
+      activemodel (>= 4.2.1)
+      faraday (>= 0.8, < 1.0)
+      multi_json (~> 1.7)
+    i18n (1.8.3)
+      concurrent-ruby (~> 1.0)
+    minitest (5.14.1)
+    multi_json (1.15.0)
+    multipart-post (2.1.1)
     rake (12.3.3)
     rspec (3.9.0)
       rspec-core (~> 3.9.0)
@@ -21,13 +46,21 @@ GEM
       diff-lcs (>= 1.2.0, < 2.0)
       rspec-support (~> 3.9.0)
     rspec-support (3.9.3)
+    simple_oauth (0.3.1)
+    thread_safe (0.3.6)
+    tzinfo (1.2.7)
+      thread_safe (~> 0.1)
 
 PLATFORMS
   ruby
 
 DEPENDENCIES
+  faraday
+  faraday_middleware
+  her (~> 1.1)
   rake (~> 12.0)
   rspec (~> 3.0)
+  simple_oauth
   weekdone!
 
 BUNDLED WITH
