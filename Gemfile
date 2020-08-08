@@ -6,7 +6,4 @@ gemspec
 gem "rake", "~> 12.0"
 gem "rspec", "~> 3.0"
 
-gem "her", "~> 1.1"
-gem "faraday"
-gem "faraday_middleware"
-gem "simple_oauth"
+gem "oauth2", "~> 1.4"
