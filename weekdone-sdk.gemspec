@@ -1,7 +1,7 @@
 require_relative 'lib/weekdone/version'
 
 Gem::Specification.new do |spec|
-  spec.name          = "weekdone"
+  spec.name          = "weekdone-sdk"
   spec.version       = Weekdone::VERSION
   spec.authors       = ["thaim"]
   spec.email         = ["thaim24@gmail.com"]
@@ -11,8 +11,6 @@ Gem::Specification.new do |spec|
   spec.homepage      = "https://github.com/thaim/weekdone-sdk-ruby"
   spec.license       = "MIT"
   spec.required_ruby_version = Gem::Requirement.new(">= 2.3.0")
-
-  spec.metadata["allowed_push_host"] = "TODO: Set to 'http://mygemserver.com'"
 
   spec.metadata["homepage_uri"] = spec.homepage
   spec.metadata["source_code_uri"] = "https://github.com/thaim/weekdone-sdk-ruby"
