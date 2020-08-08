@@ -21,12 +21,12 @@ class Weekdone::Api
     print "\ninput authorization code: "
     auth_code = gets.chomp
 
-    token_client = client.auth_code.get_token(
+    @token_client = client.auth_code.get_token(
       auth_code,
       redirect_uri: 'http://localhost:8080/oauth2/authorized'
     )
 
-    token_code = token_client.token
+    @token_code = @token_client.token
   end
 
   def listItems
