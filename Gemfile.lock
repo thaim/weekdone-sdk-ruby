@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    weekdone-sdk (0.3.0)
+    weekdone-sdk (0.3.1)
       faraday (~> 1.0)
       oauth2 (~> 1.4)
 

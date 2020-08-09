@@ -6,8 +6,7 @@ RSpec.describe Weekdone do
     sut = Weekdone::Api.new(client_id, client_secret)
 
     expect(sut).not_to be nil
-    expect(sut.token_client).to be nil
-    expect(sut.token_code).to   be nil
+    expect(sut.token_code).to be nil
   end
 
 
@@ -61,7 +60,7 @@ RSpec.describe Weekdone do
       end
 
       it 'search with team_id' do
-        my_team_id = 1
+        my_team_id = ENV['WEEKDONE_TEAM_ID']
         items = @sut.searchForItems(team_id: my_team_id)
 
         expect(items['status']).to eq('ok')
