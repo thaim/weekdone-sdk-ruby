@@ -22,11 +22,18 @@ class Weekdone::Api
 
   def authenticate
     puts "open URL to authorize:"
-    puts @client.auth_code.authorize_url
+    puts authorization_request
 
     print "\ninput authorization code: "
     auth_code = gets.chomp
+    authorization_grant(auth_code)
+  end
 
+  def authorization_request
+    @client.auth_code.authorize_url
+  end
+
+  def authorization_grant(auth_code)
     token_client = client.auth_code.get_token(
       auth_code,
       redirect_uri: 'http://localhost:8080/oauth2/authorized'
