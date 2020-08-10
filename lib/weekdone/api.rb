@@ -74,8 +74,11 @@ class Weekdone::Api
     raise NotImplementedError
   end
 
-  def getItemLikes
-    raise NotImplementedError
+  def getItemLikes(item_id)
+    params = { token: @token_code }
+
+    response = Faraday.get(API_URL + "/1/item/#{item_id}/likes", params)
+    JSON.parse(response.body)
   end
 
   def addItemLike
@@ -90,8 +93,11 @@ class Weekdone::Api
     raise NotImplementedError
   end
 
-  def getItemComments
-    raise NotImplementedError
+  def getItemComments(item_id)
+    params = { token: @token_code }
+
+    response = Faraday.get(API_URL + "/1/item/#{item_id}/comments", params)
+    JSON.parse(response.body)
   end
 
   def addItemComment
@@ -112,26 +118,43 @@ class Weekdone::Api
 
 
   def getAllTeams
-    raise NotImplementedError
+    params = { token: @token_code }
+
+    response = Faraday.get(API_URL + '/1/teams', params)
+    JSON.parse(response.body)
   end
 
 
   def getAllUsers
-    raise NotImplementedError
+    params = { token: @token_code }
+
+    response = Faraday.get(API_URL + '/1/users', params)
+    JSON.parse(response.body)
   end
 
 
   def getAllTypes
-    raise NotImplementedError
+    params = { token: @token_code }
+
+    response = Faraday.get(API_URL + '/1/types', params)
+    JSON.parse(response.body)
   end
 
 
   def getAllTags
-    raise NotImplementedError
+    params = { token: @token_code }
+
+    response = Faraday.get(API_URL + '/1/tag', params)
+    # FIXME: fail to parse
+    JSON.parse(response.body)
   end
 
-  def getSingleTag
-    raise NotImplementedError
+  def getSingleTag(tag_id)
+    params = { token: @token_code }
+
+    response = Faraday.get(API_URL + "/1/tag/#{tag_id}", params)
+    # FIXME: fail to parse
+    JSON.parse(response.body)
   end
 
   def updateTagPriority
@@ -143,8 +166,26 @@ class Weekdone::Api
   end
 
 
-  def getAllObjectives
-    raise NotImplementedError
+  def getAllObjectives(type: nil, department_id: nil, team_id: nil, user_id: nil, period: nil)
+    params = { token: @token_code }
+    if not type.nil?
+      params[:type] = type
+    end
+    if not department_id.nil?
+      params[:department_id] = department_id
+    end
+    if not team_id.nil?
+      params[:team_id] = team_id
+    end
+    if not user_id.nil?
+      params[:user_id] = user_id
+    end
+    if not period.nil?
+      params[:period] = period
+    end
+
+    response = Faraday.get(API_URL + '/1/objective', params)
+    JSON.parse(response.body)
   end
 
   def createNewObjective
@@ -159,8 +200,11 @@ class Weekdone::Api
     raise NotImplementedError
   end
 
-  def listObjectiveComments
-    raise NotImplementedError
+  def listObjectiveComments(objective_id)
+    params = { token: @token_code }
+
+    response = Faraday.get(API_URL + "/1/objective/#{objective_id}/comments", params)
+    JSON.parse(response.body)
   end
 
   def addObjectiveComment
@@ -189,6 +233,9 @@ class Weekdone::Api
 
 
   def getCompanyInfo
-    raise NotImplementedError
+    params = { token: @token_code }
+
+    response = Faraday.get(API_URL + '/1/company', params)
+    JSON.parse(response.body)
   end
 end
