@@ -1,14 +1,19 @@
 # frozen_string_literal: true
 
+require 'logger'
+
 require 'oauth2'
 require 'faraday'
 
 class Weekdone::Api
   API_URL = 'https://api.weekdone.com'
   attr_reader :client
-  attr_accessor :token_code
+  attr_accessor :token_code, :refresh_token, :loglevel
 
-  def initialize(client_id, client_secret)
+  def initialize(client_id, client_secret, loglevel: Logger::DEBUG)
+    @logger = Logger.new(STDOUT)
+    @logger.level = loglevel
+
     @client = OAuth2::Client.new(
       client_id, client_secret,
       {
@@ -55,7 +60,10 @@ class Weekdone::Api
     end
 
     response = Faraday.get(API_URL + '/1/items', params)
-    JSON.parse(response.body)
+    bodyJson = JSON.parse(response.body)
+    @logger.debug(bodyJson)
+
+    bodyJson["items"]
   end
 
   def createItem
@@ -97,7 +105,10 @@ class Weekdone::Api
     params = { token: @token_code }
 
     response = Faraday.get(API_URL + "/1/item/#{item_id}/comments", params)
-    JSON.parse(response.body)
+    bodyJson = JSON.parse(response.body)
+    @logger.debug(bodyJson)
+
+    bodyJson["comments"]
   end
 
   def addItemComment
