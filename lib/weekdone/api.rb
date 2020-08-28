@@ -177,25 +177,17 @@ class Weekdone::Api
   end
 
 
-  def getAllObjectives(type: nil, department_id: nil, team_id: nil, user_id: nil, period: nil)
+  def getAllObjectives(type: nil, departmentid: nil, teamid: nil, userid: nil, period: nil)
     params = { token: @token_code }
-    if not type.nil?
-      params[:type] = type
-    end
-    if not department_id.nil?
-      params[:department_id] = department_id
-    end
-    if not team_id.nil?
-      params[:team_id] = team_id
-    end
-    if not user_id.nil?
-      params[:user_id] = user_id
-    end
-    if not period.nil?
-      params[:period] = period
-    end
+    params[:type] = type if not type.nil?
+    params[:department_id] = departmentid if not departmentid.nil?
+    params[:team_id] = teamid if not teamid.nil?
+    params[:user_id] = userid if not userid.nil?
+    params[:period] = period if not period.nil?
 
+    @logger.debug("params: #{params}")
     response = Faraday.get(API_URL + '/1/objective', params)
+
     JSON.parse(response.body)
   end
 
