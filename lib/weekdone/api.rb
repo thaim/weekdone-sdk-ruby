@@ -47,6 +47,16 @@ class Weekdone::Api
     @token_code = @token.token
   end
 
+  def refresh
+    # @token = OAuth2::AccessToken.from_hash(@client, @token_hash)
+    if @token.expired?
+      @token = @token.refresh!
+      @logger.info("token has expired. refreshed token.")
+    end
+
+    @token_code = @token.token
+  end
+
   def token_hash
     @token.to_hash
   end
@@ -190,6 +200,8 @@ class Weekdone::Api
 
 
   def getAllObjectives(type: nil, departmentid: nil, teamid: nil, userid: nil, period: nil)
+    refresh
+
     params = { token: @token_code }
     params[:type] = type if not type.nil?
     params[:department_id] = departmentid if not departmentid.nil?
@@ -216,6 +228,8 @@ class Weekdone::Api
   end
 
   def listObjectiveComments(objective_id)
+    refresh
+
     params = { token: @token_code }
 
     response = Faraday.get(API_URL + "/1/objective/#{objective_id}/comments", params)
@@ -248,6 +262,8 @@ class Weekdone::Api
 
 
   def getCompanyInfo
+    refresh
+
     params = { token: @token_code }
 
     response = Faraday.get(API_URL + '/1/company', params)
