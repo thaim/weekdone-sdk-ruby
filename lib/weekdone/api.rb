@@ -47,6 +47,18 @@ class Weekdone::Api
     @token_code = @token.token
   end
 
+  def token_hash
+    @token.to_hash
+  end
+
+  def token_hash=(hash)
+    @logger.debug("update oauth token from hash=#{hash}")
+
+    @token = OAuth2::AccessToken.from_hash(@client, hash)
+    @token_code = @token.token
+  end
+
+
   def searchForItems(user_id: nil, team_id: nil, period: nil)
     params = { token: @token_code }
     if not user_id.nil?
