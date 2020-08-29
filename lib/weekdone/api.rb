@@ -8,7 +8,7 @@ require 'faraday'
 class Weekdone::Api
   API_URL = 'https://api.weekdone.com'
   attr_reader :client
-  attr_accessor :token_code, :refresh_token, :loglevel
+  attr_accessor :token_code, :loglevel
 
   def initialize(client_id, client_secret, loglevel: Logger::DEBUG)
     @logger = Logger.new(STDOUT)
@@ -39,12 +39,12 @@ class Weekdone::Api
   end
 
   def authorization_grant(auth_code)
-    token_client = client.auth_code.get_token(
+    @token = client.auth_code.get_token(
       auth_code,
       redirect_uri: 'http://localhost:8080/oauth2/authorized'
     )
 
-    @token_code = token_client.token
+    @token_code = @token.token
   end
 
   def searchForItems(user_id: nil, team_id: nil, period: nil)
