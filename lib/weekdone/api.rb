@@ -75,16 +75,12 @@ class Weekdone::Api
 
 
   def searchForItems(user_id: nil, team_id: nil, period: nil)
+    refresh
+
     params = { token: @token_code }
-    if not user_id.nil?
-      params[:user_id] = user_id
-    end
-    if not team_id.nil?
-      params[:team_id] = team_id
-    end
-    if not period.nil?
-      params[:period] = period
-    end
+    params[:user_id] = user_id if not user_id.nil?
+    params[:team_id] = team_id if not team_id.nil?
+    params[:period] = period if not period.nil?
 
     response = Faraday.get(API_URL + '/1/items', params)
     bodyJson = JSON.parse(response.body)
