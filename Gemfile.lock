@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    weekdone-sdk (0.3.1)
+    weekdone-sdk (0.3.2)
       faraday (~> 1.0)
       oauth2 (~> 1.4)
 
@@ -11,7 +11,7 @@ GEM
     diff-lcs (1.4.4)
     faraday (1.0.1)
       multipart-post (>= 1.2, < 3)
-    jwt (2.2.1)
+    jwt (2.2.2)
     multi_json (1.15.0)
     multi_xml (0.6.0)
     multipart-post (2.1.1)
