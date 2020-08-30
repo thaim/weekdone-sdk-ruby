@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require 'logger'
+require 'time'
 
 require 'oauth2'
 require 'faraday'
@@ -49,9 +50,13 @@ class Weekdone::Api
 
   def refresh
     # @token = OAuth2::AccessToken.from_hash(@client, @token_hash)
+    @logger.debug("tokencode=#{@token_code} clientid=#{@client.id}")
+
     if @token.expired?
       @token = @token.refresh!
-      @logger.info("token has expired. refreshed token.")
+      @logger.info("refreshed token due to expire (new token expires at #{Time.at(@token.expires_at)}).")
+    elsif
+      @logger.debug("token is still valid (token expires at #{Time.at(@token.expires_at)}).")
     end
 
     @token_code = @token.token
