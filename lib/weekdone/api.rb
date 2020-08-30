@@ -49,7 +49,6 @@ class Weekdone::Api
   end
 
   def refresh
-    # @token = OAuth2::AccessToken.from_hash(@client, @token_hash)
     @logger.debug("tokencode=#{@token_code} clientid=#{@client.id}")
 
     if @token.expired?
@@ -83,10 +82,7 @@ class Weekdone::Api
     params[:period] = period if not period.nil?
 
     response = Faraday.get(API_URL + '/1/items', params)
-    bodyJson = JSON.parse(response.body)
-    @logger.debug(bodyJson)
-
-    bodyJson["items"]
+    JSON.parse(response.body)
   end
 
   def createItem
@@ -106,6 +102,8 @@ class Weekdone::Api
   end
 
   def getItemLikes(item_id)
+    refresh
+
     params = { token: @token_code }
 
     response = Faraday.get(API_URL + "/1/item/#{item_id}/likes", params)
@@ -125,13 +123,12 @@ class Weekdone::Api
   end
 
   def getItemComments(item_id)
+    refresh
+
     params = { token: @token_code }
 
     response = Faraday.get(API_URL + "/1/item/#{item_id}/comments", params)
-    bodyJson = JSON.parse(response.body)
-    @logger.debug(bodyJson)
-
-    bodyJson["comments"]
+    JSON.parse(response.body)
   end
 
   def addItemComment
@@ -144,6 +141,8 @@ class Weekdone::Api
 
 
   def getReport
+    refresh
+
     params = { token: @token_code }
 
     response = Faraday.get(API_URL + '/1/report', params)
@@ -152,6 +151,8 @@ class Weekdone::Api
 
 
   def getAllTeams
+    refresh
+
     params = { token: @token_code }
 
     response = Faraday.get(API_URL + '/1/teams', params)
@@ -160,6 +161,8 @@ class Weekdone::Api
 
 
   def getAllUsers
+    refresh
+
     params = { token: @token_code }
 
     response = Faraday.get(API_URL + '/1/users', params)
@@ -168,6 +171,8 @@ class Weekdone::Api
 
 
   def getAllTypes
+    refresh
+
     params = { token: @token_code }
 
     response = Faraday.get(API_URL + '/1/types', params)
@@ -176,18 +181,20 @@ class Weekdone::Api
 
 
   def getAllTags
+    refresh
+
     params = { token: @token_code }
 
     response = Faraday.get(API_URL + '/1/tag', params)
-    # FIXME: fail to parse
     JSON.parse(response.body)
   end
 
   def getSingleTag(tag_id)
+    refresh
+
     params = { token: @token_code }
 
     response = Faraday.get(API_URL + "/1/tag/#{tag_id}", params)
-    # FIXME: fail to parse
     JSON.parse(response.body)
   end
 
@@ -212,7 +219,6 @@ class Weekdone::Api
 
     @logger.debug("params: #{params}")
     response = Faraday.get(API_URL + '/1/objective', params)
-
     JSON.parse(response.body)
   end
 
