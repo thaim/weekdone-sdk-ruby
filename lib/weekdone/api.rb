@@ -12,7 +12,7 @@ class Weekdone::Api
   attr_accessor :token_code, :loglevel
 
   def initialize(client_id, client_secret, loglevel: Logger::DEBUG)
-    @logger = Logger.new(STDOUT)
+    @logger = Logger.new(STDERR)
     @logger.level = loglevel
 
     @client = OAuth2::Client.new(
